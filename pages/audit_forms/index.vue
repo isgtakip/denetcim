@@ -1,0 +1,101 @@
+<template>
+<div>
+  <v-card class="pb-3 pl-3 pt-3 mb-1" outlined>
+        <Modals :mdlText="MdlText" ref="modal" :mdlBtnText="btnText" @clicked-save="clickedSave" @clicked-new="clickedNew">
+            <v-form v-model="sablonvalid" ref="sablonform">
+                <v-container fluid>
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      md="12"
+                    >
+                      <v-text-field
+                        v-model="auditFormFields.audit_form_name"
+                        :rules="textRules"
+                        :counter="50"
+                        label="Şablon Adı"
+                        required
+                        dense
+                        class="mb-8"
+                      ></v-text-field>
+
+                      <v-text-field
+                        v-model="auditFormFields.audit_form_no"
+                        :rules="textRules"
+                        :counter="50"
+                        label="Şablon Form No"
+                        required
+                        dense
+                        class="mb-8"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="12"
+                    >
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-form>
+        </Modals>
+       </v-card>
+<AuditCards :items="todo" @searched="searched"/>
+</div>
+</template>
+<script>
+/*eslint-disable*/
+import { mapState,mapGetters,mapActions,mapMutations } from "vuex";
+export default {
+     layout:"default",
+    computed:{
+      ...mapState({
+        audit_forms : state=> state.audit_forms.audit_forms,
+      }),
+      ...mapGetters({  // you won't need to destructure if 
+      filterByKeyword: 'audit_forms/filterByKeyword',   // you have no plans of adding other computed
+       }),
+      
+    },
+     methods:{
+      ...mapActions(
+        {
+        getAuditForms:'audit_forms/getAuditForms',
+        }),
+        searched(val){
+         this.todo= this.filterByKeyword(val)
+        },
+        clickedSave(){
+
+        },
+        clickedNew(){
+
+        }
+     },
+    
+    async created() {
+      await this.getAuditForms().then(()=>{
+         this.todo=this.audit_forms
+       });
+
+    },
+  data(){
+    return{
+      todo:[],
+      btnText:"Yeni Şablon Ekle",
+      MdlText:"Yeni Şablon Ekle",
+      textRules: [
+          v => !!v || 'Bu alan Gereklidir',
+          v => (v && v.length >= 3) || 'İlgili alan 3 karakterden fazla olmalıdır.',
+          v => (v && v.length <= 50) || 'İlgili alan en fazla 160 karakter olmalıdır.',
+        ],
+      sablonvalid:false,
+      auditFormFields:[{
+        audit_form_name:'',
+        audit_form_no:'',
+      }
+      ],
+
+    }
+  }
+}
+</script>
