@@ -30,6 +30,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/axios.js',
+    '~/plugins/vue-progress-path'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,12 +47,77 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     credentials:true,
   },
+
+
+  auth: {
+    cookie: {
+      options: {
+        secure: true,
+        name: 'XSRF-TOKEN',
+        secure: true
+      },
+    },
+
+    redirect: {
+      login: "/login",
+      logout: "/login",
+      callback: false,
+      home: "/"
+
+    },
+
+    strategies: {
+      'laravelSanctum': {
+        provider: 'laravel/sanctum',
+        url: process.env.baseURL,
+        endpoints: {
+          login: {
+            url: '/login',
+            method: 'post',
+            propertyName:false,
+            withCredentials: true, 
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              'Content-Type': 'application/json'
+              }
+          },
+        
+          user: { 
+            url: '/api/user', 
+            method: 'get', 
+            propertyName: false,
+            withCredentials: true, 
+                    headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json'
+                    }
+        }
+        },
+      },
+    },
+//Set-Cookie: widget_session=abc123; SameSite=None; Secure
+
+
+    plugins: [
+      '~/plugins/axios.js',
+      '~/plugins/laravel_permissions.js',
+      '~/plugins/ability.js',
+    ]
+  },
+
+
+  router: {
+    middleware: ['auth','custom'],
+  },
+
+
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

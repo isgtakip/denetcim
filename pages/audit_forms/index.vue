@@ -26,13 +26,13 @@
                         label="Şablon Form No"
                         required
                         dense
-                        class="mb-8"
                       ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
                       md="12"
                     >
+                       <SingleUpload :items="icons"/>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -50,9 +50,11 @@ export default {
     computed:{
       ...mapState({
         audit_forms : state=> state.audit_forms.audit_forms,
+        icons: state=>state.icons.icons
       }),
       ...mapGetters({  // you won't need to destructure if 
-      filterByKeyword: 'audit_forms/filterByKeyword',   // you have no plans of adding other computed
+      filterByKeyword: 'audit_forms/filterByKeyword',
+        // you have no plans of adding other computed
        }),
       
     },
@@ -60,9 +62,10 @@ export default {
       ...mapActions(
         {
         getAuditForms:'audit_forms/getAuditForms',
+        getIcons: 'icons/getIcons', 
         }),
         searched(val){
-         this.todo= this.filterByKeyword(val)
+         this.todo = this.filterByKeyword(val)
         },
         clickedSave(){
 
@@ -76,7 +79,8 @@ export default {
       await this.getAuditForms().then(()=>{
          this.todo=this.audit_forms
        });
-
+       await this.getIcons();
+    
     },
   data(){
     return{

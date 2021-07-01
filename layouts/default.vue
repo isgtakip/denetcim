@@ -92,6 +92,7 @@
 /*eslint-disable*/
 export default {
   name:"default",
+  middleware: 'auth',
   data () {
     return {
       clipped: true,
