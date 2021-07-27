@@ -32,7 +32,7 @@
                       cols="12"
                       md="12"
                     >
-                       <SingleUpload :items="icons"/>
+                       <SingleUpload :items="icons" ref="iupload"/>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -62,12 +62,18 @@ export default {
       ...mapActions(
         {
         getAuditForms:'audit_forms/getAuditForms',
+        saveAuditForms:'audit_forms/saveAuditForms',
         getIcons: 'icons/getIcons', 
         }),
         searched(val){
          this.todo = this.filterByKeyword(val)
         },
         clickedSave(){
+        //kaydetme işlemi
+        this.auditFormFields.audit_icon_id=this.$refs.iupload.icon_id;
+        this.saveAuditForms(this.auditFormFields).then(()=>{
+          this.$refs.modal.dialog=false;
+        })
 
         },
         clickedNew(){
@@ -96,6 +102,7 @@ export default {
       auditFormFields:[{
         audit_form_name:'',
         audit_form_no:'',
+        audit_icon_id:0,
       }
       ],
 
