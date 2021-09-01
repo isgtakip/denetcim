@@ -65,7 +65,7 @@
     <v-menu
             bottom
             left
-            offset-x=true
+            :offset-x=true
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -80,10 +80,10 @@
             </template>
 
             <v-list>
-              <v-list-item link>
+              <v-list-item link @click="editAudit(item)">
                 <v-list-item-title>Düzenle</v-list-item-title>
               </v-list-item>
-              <v-list-item link>
+              <v-list-item link @click="deleteAudit(item)">
                 <v-list-item-title>Sil</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -126,21 +126,27 @@ export default {
        search: function(event) {
        this.$emit('searched', this.sablonAra)
     },
+      deleteAudit(item){
+          this.$emit('clicked-delete', item)
+      },
+      editAudit(item){
+          this.$emit('clicked-edit', item)
+      }
     }
 }
 </script>
 <style>
 .fade-item {
-  transition: all .5s;
+  transition: all .2s;
 }
 .fade-enter-active  {
-  transition: opacity .5s;
+  transition: opacity .2s;
 }
 .fade-leave{
   opacity: 1;
 }
 .fade-leave-active{
-  transition: transform .5s;
+  transition: transform .2s;
   position: absolute;
     
 }
@@ -152,7 +158,7 @@ export default {
 
 }
 .fade-move {
-  transition: transform 1s;
+  transition: transform .8s;
 }
 
 </style>

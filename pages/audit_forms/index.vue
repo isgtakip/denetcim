@@ -39,7 +39,7 @@
               </v-form>
         </Modals>
        </v-card>
-<AuditCards :items="todo" @searched="searched"/>
+<AuditCards :items="todo" @searched="searched" @clicked-edit="clickedEdit" @clicked-delete="clickedDelete"/>
 </div>
 </template>
 <script>
@@ -63,6 +63,7 @@ export default {
         {
         getAuditForms:'audit_forms/getAuditForms',
         saveAuditForms:'audit_forms/saveAuditForms',
+        deleteAudit:'audit_forms/deleteAudit',
         getIcons: 'icons/getIcons', 
         }),
         searched(val){
@@ -78,7 +79,16 @@ export default {
         },
         clickedNew(){
 
+        },
+        clickedEdit(item){
+
+        },
+        clickedDelete(item){
+          this.deleteAudit(item.audit_form_id).then(()=>{
+            console.log("Silindi");
+         });
         }
+
      },
     
     async created() {

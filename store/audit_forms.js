@@ -15,7 +15,12 @@ export const mutations = {
     },
     ADD_AUDITS_FORMS(state,data){
         state.audit_forms.push(data)
+    },
+    DELETE_AUDITS(state,data){
+        const index = state.audit_forms.findIndex(p => p.audit_form_id === data)
+        state.audit_forms.splice(index, 1)
     }
+
 }
 
 export const actions = {
@@ -37,6 +42,10 @@ export const actions = {
 
         let res=await this.$denetcimApi.post("/audit_forms",null, gidecek);
         commit('ADD_AUDITS_FORMS',res.data[0]);
+    },
+    async deleteAudit({commit},request){
+        let res = await this.$denetcimApi.delete("/audit_forms/"+request); 
+        commit('DELETE_AUDITS',request) 
     }
 
 

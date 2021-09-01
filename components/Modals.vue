@@ -1,7 +1,8 @@
 <template>
     <v-dialog
       v-model="dialog"
-      fullscreen
+      :fullscreen="fullscreen"
+      eager
       hide-overlay
       transition="dialog-bottom-transition"
     >
@@ -73,6 +74,10 @@
       showbtn:{
         type:Boolean,
         default:true,
+      },
+      fullscreen:{
+        type:Boolean,
+        default:true
       }
     },
     data () {

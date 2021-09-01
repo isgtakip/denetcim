@@ -28,3 +28,4 @@ export const applyDrag = (arr, dragResult) => {
   export const getFileImage = (image) =>{
     return URL.createObjectURL(image);
   }
+
