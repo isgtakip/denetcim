@@ -27,7 +27,7 @@
   class="mt-0 pt-0 mb-0"
   >
   <v-tab
-  @click="getTab('All')">
+  @click="getTab('Active')">
         <v-icon left>
           mdi-account
         </v-icon>
@@ -117,7 +117,7 @@ export default {
             }),
         },
        created() {
-        // this.handleOptions(1,'');
+        this.handleOptions(1,'',"Active");
       },
      data () {
              return {

@@ -109,9 +109,10 @@ export default {
       '~/plugins/axios.js',
       '~/plugins/laravel_permissions.js',
       '~/plugins/ability.js',
+      
     ]
   },
-
+  //plugins: [{src: '~/plugins/full-calendar', ssr: false}],
 
   router: {
     middleware: ['auth','custom'],
@@ -135,6 +136,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: /@fullcalendar.*/, // always needed
+    //transpile: /@fullcalendar.*/, // always needed
   }
 }

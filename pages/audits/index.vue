@@ -1,5 +1,16 @@
 <template>
 <div>
+  <v-text-field
+            v-model="search"
+            label="Denetleme Ara"
+            append-icon="mdi-magnify"
+            outlined
+            single-line
+            dense
+            small
+            class="mb-2"
+            hide-details="true"
+          ></v-text-field>
 <Todocard
 v-for="audit in getallaudits"
 :key="audit.audit_location_id"
@@ -12,7 +23,13 @@ v-for="audit in getallaudits"
 :link="audit.audit_location_id"
 class="mb-2"
 />
-<div class="mt-3"></div>
+<div class="mt-3 text-center">
+   <v-pagination
+      v-model="page"
+      :length=1
+      circle
+    ></v-pagination>
+</div>
 </div>
 </template>
 <script>
@@ -32,16 +49,38 @@ export default {
       }),
   },
    created() {
-    this.getAuditsWithPage();
+      let obj =
+            {
+            arama:"",
+            page:1,
+            status:"Active"
+            };
+
+    this.getAuditsWithPage(obj);
   },
    methods:{
       ...mapActions({
       getAuditsWithPage: "audits/getAuditsWithPage",
     }),
+     handleOptions(page, search,status) {
+
+            let obj =
+            {
+            arama:search,
+            page:page,
+            status:status
+            };
+
+
+            this.getAuditsWithPage(obj).then(result => {
+                  console.log(result)
+            })
+          },
    },
   data(){
     return{
-      
+      page:1,
+      search:""
     }
   }
 }

@@ -21,16 +21,14 @@ export default {
         ...mapState({
             audits: (state) => state.audits.audits,
         }),
-        },
-      created() {
-        this.getAuditsWithPage();
+         ...mapGetters({
+              // you won't need to destructure if
+              getauditscount: "audits/getauditscount",
+              getauditsperpage: "audits/getauditsperpage",
+              getallaudits: "audits/getallaudits",
+      }),
       },
-       methods:{
-         ...mapActions({
-            getAuditsWithPage: "audits/getAuditsWithPage",
-          }),
-       },
-  data() {
+         data() {
     return {
       calendarOptions: {
         plugins: [interactionPlugin, timeGridPlugin,dayGridPlugin,listPlugin ],
