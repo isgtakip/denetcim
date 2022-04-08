@@ -33,8 +33,9 @@
       :options.sync="options"
       :footer-props="footerProps"
       :showSelect="showSelect"
-      :single-select="showSelect"
+      :single-select="singleSelect"
       @click:row="rowClick"
+      @item-selected="itemselected"
     >
     <template v-slot:expanded-item="{ headers }">
       <td :colspan="headers.length">
@@ -120,6 +121,10 @@ import _ from 'lodash';
     showSelect:{
       type:Boolean,
       default:false
+    },
+    singleSelect:{
+      type:Boolean,
+      default:true
     }
     },
     data () {
@@ -149,9 +154,12 @@ import _ from 'lodash';
 
     },
     methods:{
+        itemselected(selection){
+           this.$emit('clicked-row',selection.item)
+           console.log(selection.item)
+        },
         rowClick(item, row){
-          this.$emit('clicked-row',item)
-          row.select(true);
+         //row.select(true);
         },
         loadDetails(val){
           this.$emit('row-click', val.item)

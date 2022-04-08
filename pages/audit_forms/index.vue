@@ -46,6 +46,12 @@
 /*eslint-disable*/
 import { mapState,mapGetters,mapActions,mapMutations } from "vuex";
 export default {
+   middleware({ $gates, redirect }) {
+        // If the user is not an admin
+        if (!$gates.hasAllPermissions('audit-access')) {
+          return redirect('/login')
+        }
+      },
      layout:"default",
     computed:{
       ...mapState({

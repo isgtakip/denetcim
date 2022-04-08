@@ -2,6 +2,7 @@
     <div>
         <v-list
           subheader
+          v-if="showAciklama"
         >
           <v-list-item class="pl-0" style="min-height:50px;">
             <v-list-item-content>
@@ -54,7 +55,7 @@
             >mdi-plus</v-icon></v-btn>
         </div>
         <div v-for="(item,index) in items" :key="index" class="inputBox small rounded-lg">
-            <img :src="item.icon_url" style="width:49px;object-fit:contain;text-align:center;" @click="iconSelect(item)"/>
+            <img :src="item.icon_url" style="width:45px;object-fit:contain;text-align:center;" @click="iconSelect(item)"/>
         </div>
         </v-col>
         </v-row>
@@ -68,6 +69,14 @@ export default {
         items:{
             type:Array,
             default:null
+        },
+        showAciklama:{
+            type:Boolean,
+            default:true
+        },
+        qid:{
+            type:Number,
+            default:0
         }
     },
     data(){
@@ -99,6 +108,9 @@ export default {
             if (this.files.length>0)  return this.imageSource=getFileImage(image)
             else return this.imageSource='data:image/gif;base64,R0lGODlhAQABAPcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAABAAEAAAgEAP8FBAA7'
 
+        },
+        handleFile(qid,icon_id){
+            this.$emit('handle-file',qid,icon_id)
         },
         pickFile(event){
             this.files=[]
@@ -157,6 +169,7 @@ export default {
                 that.perctange=0
                 that.loaded=true
                 that.hasError=false
+                that.handleFile(this.qid,that.icon_id)
             })
             .catch(e=>{
                sleep(1000)

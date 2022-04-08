@@ -19,5 +19,9 @@ export const actions = {
     },
     async addIcon({commit},payload){
         commit('ADD_ICON',payload)
+    },
+    async getIconById({commit},request){
+        const icons = await this.$denetcimApi.$get(`/icons/${request}`);
+        commit('SET_ICONS',icons); 
     }
 }

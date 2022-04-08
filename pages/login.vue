@@ -82,7 +82,7 @@
 import axios from 'axios'
 axios.defaults.withCredentials = true
 export default {
-    layout:'empty',
+  layout:'empty',
   data() {
     return {
         login: {
@@ -109,8 +109,7 @@ export default {
       })
       
       } catch (err) {
-        alert(err)
-         this.loading=false
+        this.loading=false
       }
       }
     },

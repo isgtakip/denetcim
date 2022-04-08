@@ -1,6 +1,6 @@
 <template>
     <div>
-        <AuditCards :items="audit_form" :colLength="12" :searchShow="false"/>
+        <AuditCards :items="audit_form" :colLength="12" :searchShow="false" class="pb-2"/>
     <Modals
     :mdlText="MdlText"
     :showbtn="false"
@@ -90,6 +90,12 @@ import { Container, Draggable } from "vue-smooth-dnd";
 import { applyDrag, generateItems } from '../../src/utils'
 import { mapState,mapGetters,mapActions,mapMutations } from "vuex";
 export default {
+       middleware({ $gates, redirect }) {
+        // If the user is not an admin
+        if (!$gates.hasAllPermissions('audit-access')) {
+          return redirect('/login')
+        }
+      },
      async asyncData({ params, $denetcimApi }) {
       const audit_form = await $denetcimApi.$get(`/audit_forms/${params.id}`)
       return { audit_form}

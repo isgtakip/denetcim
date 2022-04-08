@@ -122,7 +122,7 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: 'tr'
     }
   },
   components: true,
@@ -135,5 +135,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: /@fullcalendar.*/, // always needed
   }
 }

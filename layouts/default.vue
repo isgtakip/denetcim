@@ -8,9 +8,7 @@
   flat
   >
   <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    <v-avatar :tile="true">
-    <img :src="require('@/assets/images/logo/sari_elektronik.jpg')" alt="logo" style="width:40px;height:40px;">
-  </v-avatar>
+    <img :src="require('@/assets/images/logo/sari_elektronik.jpg')" alt="logo" max-width="40px" width="40px">
     <v-toolbar-title>
       Denetçim <span style="font-weight:bold;">v0.1</span></v-toolbar-title>
     <!-- -->
@@ -50,14 +48,26 @@
       >
         <v-list-item
         link
-        to='/'>
+        to='/audits'>
         <v-list-item-icon>
           <v-icon>mdi-home</v-icon>
         </v-list-item-icon>
-
-        <v-list-item-title>Anasayfa</v-list-item-title>
+        <v-list-item-title>Denetlemelerim</v-list-item-title>
       </v-list-item>
-
+         <v-list-group
+        :value="true"
+        prepend-icon="mdi-exclamation"
+      >
+        <template v-slot:activator>
+          <v-list-item-title>Denetleme Yönetimi</v-list-item-title>
+        </template>
+          <v-list-item
+            link
+            to="/denetleme-listesi"
+          >
+            <v-list-item-title>Denetleme Takvimi</v-list-item-title>
+          </v-list-item>
+        </v-list-group>
          <v-list-group
         :value="true"
         prepend-icon="mdi-cog"
@@ -68,6 +78,7 @@
           <v-list-item
             link
             to="/audit_forms"
+            v-can="'audit-access'"
           >
             <v-list-item-title>Denetleme Şablonları</v-list-item-title>
           </v-list-item>
@@ -82,6 +93,7 @@
           <v-list-item
             link
             to="/firms"
+            v-can="'firms-access'"
           >
             <v-list-item-title>Firma Listesi</v-list-item-title>
 
@@ -89,6 +101,7 @@
           <v-list-item
             link
             to="/nace_kodlari"
+            v-can="'nace-access'"
           >
             <v-list-item-title>Nace Kodları</v-list-item-title>
 
@@ -96,12 +109,13 @@
            <v-list-item
             link
             to="/locations"
+            v-can="'location-access'"
           >
             <v-list-item-title>Lokasyonlar</v-list-item-title>
 
           </v-list-item>
         </v-list-group>
-           <v-list-group
+        <v-list-group
         :value="true"
         prepend-icon="mdi-account"
       >
@@ -119,6 +133,21 @@
             to="/roles"
           >
             <v-list-item-title>Roller</v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+        <v-list-group
+        :value="true"
+        prepend-icon="mdi-account"
+        v-can="'customer-access'"
+      >
+        <template v-slot:activator>
+          <v-list-item-title>Müşteri Yönetimi</v-list-item-title>
+        </template>
+          <v-list-item
+            link
+            to="/customers"
+          >
+            <v-list-item-title>Müşteri Listesi</v-list-item-title>
           </v-list-item>
         </v-list-group>
       </v-list>

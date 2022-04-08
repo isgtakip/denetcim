@@ -11,3 +11,10 @@ $input-font-size: 13px;
 .v-toolbar__content, .v-toolbar__extension {
     border-bottom: 1px solid #efefef;
 }
+ input {
+    font-size: 12px;
+  }
+
+  .v-input .v-label {
+    font-size: 12px;
+}

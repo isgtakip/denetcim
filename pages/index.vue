@@ -1,6 +1,5 @@
 <template>
 <div>
-<Todocard/>
 <div class="mt-3"></div>
 
 </div>

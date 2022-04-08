@@ -5,7 +5,7 @@
           <v-list
           class="pl-0 mb-0"
         >
-<v-form v-model="firmavalid" ref="firma_form">
+<v-form v-model="firmavalid" ref="firma_form" >
 <v-list-item class="pb-0 mb-0 pb-0 mt-0" >
             <v-list-item-content class="pl-1 mb-0 pb-0">
               <v-list-item-title>Firma Kayıt</v-list-item-title>
@@ -96,6 +96,7 @@
         :title="datatitle"
         @clicked-delete="clickedDelete"
         @clicked-edit="clickedEdit"
+        :keyOfItem="keyItem"
         ref="dt"
         />
     </div></template>
@@ -143,7 +144,12 @@ export default {
                 firma_unvan:this.firma_tam_unvan,
                 sahis_ad_soyad:this.sahis_ad_soyad,
                 firma_turu:0,
+
                 ust_firma_id:0,
+                nace_kod_id:0,
+                firma_sgk:0,
+                firma_il_id:0,
+                firma_ilce_id:0,
             }
 
              this.yeniFirmaEkle(obj).then(()=>{
@@ -162,6 +168,10 @@ export default {
                 firma_id:this.firma_id,
                 firma_turu:0,
                 ust_firma_id:0,
+                nace_kod_id:0,
+                firma_sgk:0,
+                firma_il_id:0,
+                firma_ilce_id:0,
             }
 
              this.firmaDuzelt(obj).then(()=>{
@@ -217,7 +227,7 @@ export default {
           status:null,
           sahis_ad_soyad:'',
           firma_id:0,
-
+          keyItem:'firma_id'
       }
 }
 }

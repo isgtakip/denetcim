@@ -28,10 +28,14 @@
         :md="colLength"
         sm="12"
         :lg="colLength"
+        class="mb-0 mt-0 pb-0 pt-2"
       >
+      <div>
 <v-card
-    elevation="0"
+    elevation="1"
     outlined
+    class="mb-0 pt-0"
+    :to="mode ? `/audits/${item.audit_location_id}/forms/${item.audit_form_id}` : ''"
     >
  <v-list
       subheader
@@ -49,7 +53,18 @@
 
           <v-list-item-subtitle v-text="item.updated_at"></v-list-item-subtitle>
         </v-list-item-content>
-
+        <v-list-item-action v-if="mode">
+         <div class="text-center">
+    <v-progress-circular
+      :rotate="360"
+      :size="55"
+      :width="3"
+      :value="parseInt(item.tamamlanma_orani)"
+      color="blue"
+    >
+     {{ parseInt(item.tamamlanma_orani) }}%
+    </v-progress-circular></div>
+        </v-list-item-action>
         <v-list-item-action v-if="searchShow">
          <div class="text-center">
            <v-btn
@@ -93,6 +108,7 @@
       </v-list-item>
     </v-list>
 </v-card>
+      </div>
       </v-col> </transition-group>
       </v-row>
    </v-container>
@@ -101,6 +117,12 @@
 <script>
 /*eslint-disable*/
 export default {
+  computed: {
+  classObject: function () {
+    if (this.mode) return "`/audit_forms/${item.audit_form_id}`"
+    else return false
+  }
+},
     props:{
       items:{
         type:Array,
@@ -113,13 +135,18 @@ export default {
       searchShow:{
         type:Boolean,
         default:true,
-      }
+      },
+      mode:{
+        type:Boolean,
+        default:false
+      },
 
     },
     data() {
         return {
             value:20,
-            sablonAra:""
+            sablonAra:"",
+            tamamlanma_orani:0,
         }
     },
     methods:{
