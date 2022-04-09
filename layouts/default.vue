@@ -155,7 +155,7 @@
     <!-- Provides the application the proper gutter -->
     <v-container fluid>
       <!-- If using vue-router -->
-      <nuxt />
+      <nuxt keep-alive/>
     </v-container>
   </v-main>
 
