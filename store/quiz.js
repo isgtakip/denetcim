@@ -9,7 +9,12 @@ const getDefaultState = () => {
   }
   
 // initial state
-export const state = getDefaultState()
+export const state = () => {
+    return {
+      quiz: [],
+      messagge:[],
+    }
+  }
   
 
 export const mutations = {
