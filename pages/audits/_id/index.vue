@@ -5,8 +5,8 @@
 /*eslint-disable*/
 export default {
      async asyncData({ params, $denetcimApi }) {
-      const audit_form = await $denetcimApi.$get(`/audits/${params.id}`)
-      return { audit_form}
+      const audit_form = await $denetcimApi.$get(`public/api/audits/${params.id}`)
+      return {audit_form}
     },
 }
 </script>
