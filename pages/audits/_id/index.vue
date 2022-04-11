@@ -10,6 +10,7 @@ export default {
     },*/
     async asyncData({env,params,$axios}) {
         console.log(env.apiURL)
+      $axios.defaults.withCredentials = true
       const audit_form = await $axios.$get(env.apiURL+`/audits/${params.id}`)
       return { audit_form }
     }
