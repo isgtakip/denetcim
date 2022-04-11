@@ -88,7 +88,7 @@ export default {
     }),
     },
     async created() {
-    this.resetState();
+   // this.resetState();
     let obj ={
       id: this.$route.params.id,
       fid:this.$route.params.fid
@@ -118,7 +118,7 @@ export default {
     methods:{
       ...mapActions({
       getQuiz :"quiz/getQuiz",
-      resetState :"quiz/resetState",
+     // resetState :"quiz/resetState",
       saveQuiz:'quiz/saveQuiz'
     }),
        resetSubQuestions(val){
