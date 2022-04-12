@@ -96,9 +96,11 @@ export default {
           return redirect('/login')
         }
       },
-     async asyncData({ params, $denetcimApi }) {
-      const audit_form = await $denetcimApi.$get(`/audit_forms/${params.id}`)
-      return { audit_form}
+      
+     async asyncData({env,params,$axios}) {
+      $axios.defaults.withCredentials = true
+      const audit_form = await $axios.$get(env.apiURL+`/audit_forms/${params.id}`)
+      return { audit_form }
     },
     computed:{
        sectionslarim: {

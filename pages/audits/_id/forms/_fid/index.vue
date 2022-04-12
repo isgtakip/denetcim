@@ -77,11 +77,6 @@ import { mapState,mapGetters,mapActions,mapMutations } from "vuex";
 import Vue from 'vue';
 
 export default {
-  /*
-      async asyncData({ params, $denetcimApi }) {
-      const q = await $denetcimApi.$get(`/audits/${params.id}/forms/${params.fid}`)
-      return {q}
-    },*/
     computed:{
       ...mapState({
       quiz: (state) => state.quiz.quiz,

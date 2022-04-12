@@ -141,13 +141,16 @@ methods:{
         Object.assign(this.$data, initialState());
         this.node.sub_questions.map((item)=>{
           if (item.answers.length>0){
-          if(item.answer_type_id==1 || item.answer_type_id==2) this.selectedOption[item.question_id]=item.answers[0].answer_option_id
+          if(item.answer_type_id==1 || item.answer_type_id==2) {
+          this.selectedOption[item.question_id]=item.answers[0].answer_option_id
+          }
           if(item.answer_type_id==3) {
             this.getIconById(item.answers[0].answer_option_id).then(()=>{
             this.icon=this.icons;
             })
           }
-            }
+          this.changedInput(item.question_id,item.answers[0].answer_option_id)
+          }
         });
     },
     changedInput(qid,val){
