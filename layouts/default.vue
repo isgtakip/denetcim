@@ -42,6 +42,20 @@
       left
       app
     >
+    <template v-slot:prepend>
+        <v-list-item two-line>
+          <v-list-item-avatar>
+            <img src="https://randomuser.me/api/portraits/women/81.jpg">
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title><b>{{ $auth.user.name }}</b></v-list-item-title>
+            <v-list-item-subtitle>{{ $auth.user.email}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+
+      <v-divider></v-divider>
       <v-list
         nav
         dense
@@ -55,7 +69,6 @@
         <v-list-item-title>Denetlemelerim</v-list-item-title>
       </v-list-item>
          <v-list-group
-        :value="true"
         prepend-icon="mdi-exclamation"
       >
         <template v-slot:activator>
@@ -69,7 +82,6 @@
           </v-list-item>
         </v-list-group>
          <v-list-group
-        :value="true"
         prepend-icon="mdi-cog"
       >
         <template v-slot:activator>
@@ -84,7 +96,6 @@
           </v-list-item>
         </v-list-group>
            <v-list-group
-        :value="true"
         prepend-icon="mdi-plus"
       >
         <template v-slot:activator>
@@ -116,7 +127,6 @@
           </v-list-item>
         </v-list-group>
         <v-list-group
-        :value="true"
         prepend-icon="mdi-account"
       >
         <template v-slot:activator>
@@ -136,7 +146,6 @@
           </v-list-item>
         </v-list-group>
         <v-list-group
-        :value="true"
         prepend-icon="mdi-account"
         v-can="'customer-access'"
       >

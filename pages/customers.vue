@@ -54,7 +54,6 @@
         </v-list>
         </Modals>
        </v-card>
-       {{this.$gates.hasAllPermissions('location-list')}}
   <Datatable
         :headers="headers"
         :items="getAllCustomers"

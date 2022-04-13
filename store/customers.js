@@ -24,12 +24,15 @@ export const mutations = {
     SET_CUSTOMERS_MESSAGGE(state,data){
         state.messagge = data;
     },
+    SET_ALL_CUSTOMERS_WITHOUT_PAGE_AND_SEARCH(state,data){
+        state.customers=data;
+    }
 }
 
 export const actions = {
-    async getCustomers({commit}, request) {
 
-        
+
+    async getCustomers({commit}, request) {
         var params = new URLSearchParams();
         params.append("page", request.page);
         params.append("search", request.arama);
@@ -42,6 +45,12 @@ export const actions = {
 
     let res = await this.$denetcimApi.$get('customers', gidecek);
     commit('SET_CUSTOMERS_WITH_PAGES_SEARCH', res);
+    },
+
+    async getAllCustomersWithoutPage({commit}){
+        let res = await this.$denetcimApi.$get('getAllCustomersWithoutPage');
+        commit('SET_ALL_CUSTOMERS_WITHOUT_PAGE_AND_SEARCH', res);
+
     },
 
     async saveCustomer({commit}, request){
