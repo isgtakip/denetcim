@@ -181,7 +181,6 @@ export default {
           firma_unvan: this.firma_tam_unvan,
           sahis_ad_soyad: this.sahis_ad_soyad,
           firma_turu: 0,
-
           ust_firma_id: 0,
           nace_kod_id: 0,
           firma_sgk: 0,

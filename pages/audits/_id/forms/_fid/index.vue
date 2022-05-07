@@ -24,7 +24,8 @@
     >
       <v-expansion-panel
       v-for="q in item.sorular"
-      :key="q.question_id">
+      :key="q.question_id"
+      >
         <v-expansion-panel-header
         disable-icon-rotate>
           {{q.question}}
@@ -37,7 +38,7 @@
             </v-icon>
           </template>
         </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        <v-expansion-panel-content eager>
           <v-btn-toggle
           v-model="selectedOption[q.question_id]"
           class="mb-6"
