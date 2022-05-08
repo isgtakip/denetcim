@@ -175,6 +175,7 @@ export default {
     clickedSave() {
       this.$refs.firma_form.validate();
       if (this.status == "new" && this.firmavalid) {
+        
         let obj = {
           firma_tip_id: this.firma_tipi,
           firma_kisa_ad: this.firma_kisa_ad,
@@ -186,8 +187,10 @@ export default {
           firma_sgk: 0,
           firma_il_id: 0,
           firma_ilce_id: 0,
+          adres:"",
+          customer_id:this.customer_id
         };
-
+        console.log(this.customer_id)
         this.yeniFirmaEkle(obj).then(() => {
           this.$refs.modals.dialog = false;
           this.handleOptions(this.$refs.dt.options, "");
@@ -207,8 +210,9 @@ export default {
           firma_sgk: 0,
           firma_il_id: 0,
           firma_ilce_id: 0,
+          adres:"",
+          customer_id:this.customer_id
         };
-
         this.firmaDuzelt(obj).then(() => {
           this.$refs.modals.dialog = false;
           this.handleOptions(this.$refs.dt.options, "");

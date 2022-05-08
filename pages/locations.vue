@@ -298,6 +298,8 @@ export default {
           firma_il_id: this.il,
           firma_ilce_id: this.ilce,
           ust_firma_id: this.ana_firma.firma_id,
+          firm_adres:this.adres,
+          customer_id:this.ana_firma.customer_id,
         };
 
         this.yeniFirmaEkle(obj).then(() => {
@@ -319,7 +321,11 @@ export default {
           firma_il_id: this.il,
           firma_ilce_id: this.ilce,
           ust_firma_id: this.ana_firma.firma_id,
+          firm_adres:this.adres,
+          customer_id:this.ana_firma.customer_id,
         };
+
+
 
         this.firmaDuzelt(obj).then(() => {
           this.$refs.modals.dialog = false;
@@ -338,6 +344,7 @@ export default {
       this.sahis_ad_soyad = val.sahis_ad_soyad;
       this.firma_tipi = val.firma_tip_id;
       this.firma_sgk = val.firma_sgk;
+      this.adres=val.firm_adres;
       //naceler
       this.naceler.splice(0);
       this.naceler.push({
@@ -363,6 +370,11 @@ export default {
       this.firma_tipi = 0;
       this.sahis_ad_soyad = "";
       this.status = "new";
+      this.adres ="";
+      this.firma_sgk="";
+      this.il=0;
+      this.ilce=0;
+      this.nace=0;
     },
   },
   data() {

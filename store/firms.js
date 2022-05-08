@@ -122,7 +122,9 @@ export const actions = {
         params.append ("firma_sgk",request.firma_sgk);
         params.append ("firma_il_id", request.firma_il_id);
         params.append ("firma_ilce_id", request.firma_ilce_id);
-
+        params.append ("customer_id" , request.customer_id);
+        params.append ("firm_adres", request.firm_adres);
+      
         var gidecek = {
             params: params
         };
@@ -157,7 +159,8 @@ export const actions = {
             params.append ("firma_sgk",request.firma_sgk);
             params.append ("firma_il_id", request.firma_il_id);
             params.append ("firma_ilce_id", request.firma_ilce_id);
-
+            params.append ("customer_id",request.customer_id);
+            params.append ("firm_adres",request.firm_adres);
        
             var gidecek = {
                 params: params
