@@ -101,12 +101,17 @@ export default {
      this.$refs.loginform.validate();
      if(this.loginvalid){
       try {
-
       this.loading=true
       this.$auth.loginWith('laravelSanctum', { data: this.login}).then((response) => {
         console.log(response)
       this.loading=false
-      })
+      }).then((response) => {
+      console.log(response)
+      this.loading=false
+      }).catch(error => {
+      alert(error.response.data.errors.email)
+      this.loading=false
+      });
       
       } catch (err) {
         this.loading=false

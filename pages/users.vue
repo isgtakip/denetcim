@@ -124,6 +124,12 @@
 import { mapState,mapGetters,mapActions,mapMutations } from "vuex";
 import Vue from 'vue';
 export default {
+  middleware({ $gates, redirect }) {
+        // If the user is not an admin
+        if (!$gates.hasAllPermissions('user-access')) {
+          return redirect('/login')
+        }
+      },
       computed:{
       ...mapState({
         users : state=> state.users.users,

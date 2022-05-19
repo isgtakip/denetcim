@@ -26,9 +26,10 @@
             <v-list-item
                 v-for="(link,idx) in links"
                 :key="idx"
-                :to="link.route"
+                to="/"
+                @click="logout"
             >
-          <v-list-item-title>{{ link.text }}</v-list-item-title>
+          <v-list-item-title>Güvenli Çıkış</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -83,6 +84,7 @@
         </v-list-group>
          <v-list-group
         prepend-icon="mdi-cog"
+        v-can="'template-access'"
       >
         <template v-slot:activator>
           <v-list-item-title>Şablon Yönetimi</v-list-item-title>
@@ -90,7 +92,7 @@
           <v-list-item
             link
             to="/audit_forms"
-            v-can="'audit-access'"
+            v-can="'template-access'"
           >
             <v-list-item-title>Denetleme Şablonları</v-list-item-title>
           </v-list-item>
@@ -128,6 +130,7 @@
         </v-list-group>
         <v-list-group
         prepend-icon="mdi-account"
+        v-can="'role-access' || 'user-access'"
       >
         <template v-slot:activator>
           <v-list-item-title>Kullanıcı Yönetimi</v-list-item-title>
@@ -135,12 +138,14 @@
           <v-list-item
             link
             to="/users"
+            v-can="'user-access'"
           >
             <v-list-item-title>Kullanıcı Listesi</v-list-item-title>
           </v-list-item>
            <v-list-item
             link
             to="/roles"
+            v-can="'role-access'"
           >
             <v-list-item-title>Roller</v-list-item-title>
           </v-list-item>
@@ -192,6 +197,11 @@ export default {
       rightDrawer: false,
       title: 'Vuetify.js'
     }
-  }
+  },
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+    },
+  },
 }
 </script>

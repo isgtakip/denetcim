@@ -53,9 +53,11 @@
             @click="detItem(item)">mdi-eye</v-icon>
          <v-icon
             small
+            v-if="showEditBtn"
             @click="editItem(item)">mdi-pencil</v-icon>
           <v-icon
             small
+            v-if="showDeleteBtn"
             @click="deleteItem(item)">mdi-delete</v-icon>
       </template>
 </v-data-table>
@@ -123,6 +125,14 @@ import _ from 'lodash';
       default:false
     },
     singleSelect:{
+      type:Boolean,
+      default:true
+    },
+    showDeleteBtn:{
+      type:Boolean,
+      default:true
+    },
+    showEditBtn:{
       type:Boolean,
       default:true
     }

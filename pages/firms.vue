@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="pb-3 pl-3 mb-5 pt-3" outlined>
+    <v-card class="pb-3 pl-3 mb-5 pt-3" outlined v-can="'firms-create'">
       <Modals
         ref="modals"
         @clicked-save="clickedSave"
@@ -116,7 +116,7 @@
       </Modals>
     </v-card>
     <Datatable
-      :headers="headers"
+      :headers="tableHeaders"
       :items="getAllFirmalar"
       :loading="loading"
       :items-length="getFirmalarCount"
@@ -125,6 +125,8 @@
       @clicked-delete="clickedDelete"
       @clicked-edit="clickedEdit"
       :keyOfItem="keyItem"
+      :showDeleteBtn="this.$gates.hasPermission('firms-delete')"
+      :showEditBtn="this.$gates.hasPermission('firms-edit')"
       ref="dt"
     />
   </div>
@@ -134,7 +136,23 @@
 import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 import Vue from "vue";
 export default {
-  computed: {
+computed: {
+    tableHeaders(){
+       if (this.$gates.hasPermission('location-edit') || this.$gates.hasPermission('location-delete')){
+         return [
+        { text: "Firma Ünvan", value: "firma_tam_unvan", sortable: false },
+        { text: "Firma Kısa Ad", value: "firma_kisa_ad", sortable: false },
+        { text: "Actions", value: "actions", sortable: false },
+        ];
+       }
+       else {
+         return [
+        { text: "Firma Ünvan", value: "firma_tam_unvan", sortable: false },
+        { text: "Firma Kısa Ad", value: "firma_kisa_ad", sortable: false },
+        ];
+       }
+
+    },
     ...mapState({
       firmalar: (state) => state.firms.firmalar,
       firma_tipleri: (state) => state.firms.firmaFormsData,
@@ -248,11 +266,6 @@ export default {
   },
   data() {
     return {
-      headers: [
-        { text: "Firma Ünvan", value: "firma_tam_unvan", sortable: false },
-        { text: "Firma Kısa Ad", value: "firma_kisa_ad", sortable: false },
-        { text: "Actions", value: "actions", sortable: false },
-      ],
       loading: true,
       datatitle: "Ana Firmalar",
       MdlText: "Yeni Firma Ekle",

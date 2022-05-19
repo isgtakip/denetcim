@@ -4,9 +4,9 @@
       <v-row>
         <v-col
           cols="12"
-          md="9"
+          :md="calculateColumn"
           sm="12"
-          lg="9"
+          :lg="calculateColumn"
           class="pl-0 mb-0 pb-0 pt-3 mt-0 pr-3"
         >
           <v-autocomplete
@@ -29,6 +29,7 @@
           sm="12"
           lg="3"
           class="pl-0 mb-3 pb-3 pt-3 mt-0 pr-3"
+          v-can="'location-create'"
         >
           <v-btn
             color="primary"
@@ -37,6 +38,7 @@
             dense
             @click="clickedNew"
             :disabled="this.ana_firma.firma_id == 0"
+            v-can="'location-create'"
           >
             Yeni Lokasyon Ekle
           </v-btn></v-col
@@ -181,7 +183,7 @@
       </v-list>
     </Modals>
     <Datatable
-      :headers="headers"
+      :headers="tableHeaders"
       :items="getAllFirmalar"
       :loading="loading"
       :items-length="getFirmalarCount"
@@ -193,6 +195,8 @@
       class="mr-3 ml-0"
       :slots="slots"
       :keyOfItem="keyItem"
+      :showDeleteBtn="this.$gates.hasPermission('location-delete')"
+      :showEditBtn="this.$gates.hasPermission('location-edit')"
     >
       <template v-slot:tehlike_sinifi="{ degisken }">
         <v-chip :color="getColor(degisken.tehlike_sinifi)" small dark label>
@@ -208,6 +212,34 @@ import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 import Vue from "vue";
 export default {
   computed: {
+    calculateColumn(){
+       if (this.$gates.hasPermission('location-create')){
+          return 9
+       }
+       else{
+          return 12
+        }
+    },
+    tableHeaders(){
+       if (this.$gates.hasPermission('location-edit') || this.$gates.hasPermission('location-delete')){
+         return [
+        { text: "Lokasyon Adı", value: "firma_tam_unvan", sortable: false },
+        { text: "Sgk Numarası", value: "firma_sgk", sortable: false },
+        { text: "Nace Kodu", value: "nace_kodu", sortable: false },
+        { text: "Tehlike Sınıfı", value: "tehlike_sinifi", sortable: false },
+        { text: "Actions", value: "actions", sortable: false },
+        ];
+       }
+       else {
+         return [
+        { text: "Lokasyon Adı", value: "firma_tam_unvan", sortable: false },
+        { text: "Sgk Numarası", value: "firma_sgk", sortable: false },
+        { text: "Nace Kodu", value: "nace_kodu", sortable: false },
+        { text: "Tehlike Sınıfı", value: "tehlike_sinifi", sortable: false },
+        ];
+       }
+
+    },
     ...mapState({
       firmalar: (state) => state.firms.firmalar,
       firma_tipleri: (state) => state.firms.firmaFormsData,
@@ -379,13 +411,6 @@ export default {
   },
   data() {
     return {
-      headers: [
-        { text: "Lokasyon Adı", value: "firma_tam_unvan", sortable: false },
-        { text: "Sgk Numarası", value: "firma_sgk", sortable: false },
-        { text: "Nace Kodu", value: "nace_kodu", sortable: false },
-        { text: "Tehlike Sınıfı", value: "tehlike_sinifi", sortable: false },
-        { text: "Actions", value: "actions", sortable: false },
-      ],
       slots: [
         {
           Id: 1,
