@@ -45,7 +45,7 @@
       <v-list-item>
         <img
         class="mr-3"
-        :src="'http://localhost:8000/storage/files/'+item.icon_url"
+        :src="envfile+'/storage/files/'+item.icon_url"
         style="width: 49px; object-fit: contain; text-align: center;"
       >
               <v-list-item-content>
@@ -121,7 +121,10 @@ export default {
   classObject: function () {
     if (this.mode) return "`/audit_forms/${item.audit_form_id}`"
     else return false
-  }
+  },
+  envfile() {
+      return process.env.baseURL;
+  },
 },
     props:{
       items:{
