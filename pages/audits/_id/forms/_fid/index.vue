@@ -6,6 +6,7 @@
         md="12"
         sm="12"
         lg="12"
+        xs="12"
         class="pt-7">
         <v-card
     elevation="0"
@@ -41,7 +42,6 @@
         <v-expansion-panel-content eager>
           <v-btn-toggle
           v-model="selectedOption[q.question_id]"
-          class="mb-6"
           @change="resetSubQuestions(q.question_id)"
          >
           <v-btn
@@ -50,6 +50,7 @@
       v-for="opt in q.questionoptions"
       :key="opt.options.option_id"
       :value="opt.options.option_id"
+      small
     >
       {{opt.options.option_name}}
     </v-btn>
@@ -176,3 +177,13 @@ export default {
     }
 }
 </script>
+<style>
+.theme--light.v-btn-toggle:not(.v-btn-toggle--group) {
+    background: #FFFFFF;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-flow: column;
+    border:1px solid #efefef;
+}
+
+</style>
