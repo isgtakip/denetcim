@@ -50,7 +50,6 @@
       v-for="opt in q.questionoptions"
       :key="opt.options.option_id"
       :value="opt.options.option_id"
-      small
     >
       {{opt.options.option_name}}
     </v-btn>

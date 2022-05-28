@@ -26,9 +26,10 @@ class="mb-2"
 <div class="mt-3 text-center">
    <v-pagination
       v-model="page"
-      :length=1
-      circle
-    ></v-pagination>
+      :length="getauditslastpage"
+      @input="onPageChange"
+      circle>
+      </v-pagination>
 </div>
 </div>
 </template>
@@ -46,6 +47,7 @@ export default {
               getauditscount: "audits/getauditscount",
               getauditsperpage: "audits/getauditsperpage",
               getallaudits: "audits/getallaudits",
+              getauditslastpage: "audits/getauditslastpage",
       }),
   },
    created() {
@@ -62,7 +64,10 @@ export default {
       ...mapActions({
       getAuditsWithPage: "audits/getAuditsWithPage",
     }),
-     handleOptions(page, search,status) {
+    onPageChange(page){
+      this.handleOptions(page,this.search,"Active")
+    },
+    handleOptions(page, search,status) {
 
             let obj =
             {
