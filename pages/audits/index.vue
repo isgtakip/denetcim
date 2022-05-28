@@ -67,6 +67,7 @@ export default {
       getAuditsWithPage: "audits/getAuditsWithPage",
     }),
     debounceInput: _.debounce(function () {
+    this.page=1;
     this.handleOptions(this.page,this.search,"Active")
     }, 300),
     onPageChange(page){
