@@ -37,6 +37,7 @@ class="mb-2"
 <script>
 /*eslint-disable*/
 import { mapState,mapGetters,mapActions,mapMutations } from "vuex";
+import _ from 'lodash';
 export default {
   layout:"default",
   computed: {
@@ -66,7 +67,7 @@ export default {
       getAuditsWithPage: "audits/getAuditsWithPage",
     }),
     debounceInput: _.debounce(function () {
-    this.handleOptions(this.page,this.search,"Active");
+    this.handleOptions(this.page,this.search,"Active")
     }, 300),
     onPageChange(page){
       this.page=page;
