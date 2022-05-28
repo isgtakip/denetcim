@@ -10,6 +10,7 @@
             small
             class="mb-2"
             hide-details="true"
+            @input="debounceInput"
           ></v-text-field>
 <Todocard
 v-for="audit in getallaudits"
@@ -64,7 +65,11 @@ export default {
       ...mapActions({
       getAuditsWithPage: "audits/getAuditsWithPage",
     }),
+    debounceInput: _.debounce(function () {
+    this.handleOptions(this.page,this.search,"Active");
+    }, 300),
     onPageChange(page){
+      this.page=page;
       this.handleOptions(page,this.search,"Active")
     },
     handleOptions(page, search,status) {
